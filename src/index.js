@@ -12,6 +12,10 @@ function App() {
   const [max, setMax] = useState(300);
 
   const iniciarJogo = () => {
+    setPalpite(150);
+    setNumeroPalpites(0);
+    setMax(300);
+    setMin(0);
     setEstado("RODANDO");
   };
 
@@ -33,6 +37,22 @@ function App() {
     setPalpite(proxPalpite);
   };
 
+  const acertou = () => {
+    setEstado("FIM");
+  };
+
+  if (estado === "FIM") {
+    return (
+      <div>
+        <p>
+          Seus dados foram: numero de palpites {numeroPalpites} e o numero
+          escolhido foi {palpite}
+        </p>
+        <button onClick={iniciarJogo}>Reinicar o jogo!</button>
+      </div>
+    );
+  }
+
   return (
     <div className="App">
       <p>O seu numero eh {palpite}?</p>
@@ -40,7 +60,7 @@ function App() {
         Min: {min} / Max: {max} / Numero de palpites: {numeroPalpites}
       </p>
       <button onClick={menor}>Menor!</button>
-      <button>Acertou!</button>
+      <button onClick={acertou}>Acertou!</button>
       <button onClick={maior}>Maior!</button>
     </div>
   );
